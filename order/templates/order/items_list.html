@@ -8,7 +8,13 @@
 </head>
 <body>
     {% for item in Items %}
-    <h4>Name -- {{ item.name }}</h4>
-    {% endfor %}
+    <p>
+        <h4>Name -- {{ item.name }}</h4>
+        <a href = '{% url "detail" item.id %}'>Click here to the item</a>
+        {% endfor %}
+    </p>
 </body>
+
+<a href="{% url 'add-item' %}">Add item</a>
+
 </html>

@@ -12,6 +12,11 @@
 Description -- {{item.description}}
 <br> quantity-- {{ item.quantity }}<br>
 date updated -- {{ item.date_updated }}<br>
-    </p>        
+    </p>
+
+<p>
+    <a href="{% url 'delete-item' item.id %}">Delete This Item</a>
+</p>
+
 </body>
 </html>

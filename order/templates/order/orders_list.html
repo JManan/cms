@@ -7,14 +7,13 @@
     <title>Document</title>
 </head>
 <body>
-    {% for item in Items %}
+    {% for order in Orders %}
     <p>
-        <h4>Name -- {{ item.name }}</h4>
-        <a href = '{% url "detail" item.id %}'>Click here to the item</a>
+        <h4>Name -- {{ order.name }}</h4>
+        <a href = '{% url "detail" order.id %}'>Click here for the order</a>
         {% endfor %}
     </p>
 </body>
 
-<a href="{% url 'add-item' %}">Add item</a>
-
+<a href="{% url 'add-order' %}">Add Order</a>
 </html>

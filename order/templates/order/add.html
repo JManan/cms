@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>add</title>
+    <title>Add Order</title>
 </head>
 <body>
-    <h1> Welcome to add a post page!</h1>
+    <h1> Welcome to add an Order page!</h1>
 <div class="content-section">
     <form method="POST">
         {% csrf_token %}
         <fieldset class='form-group'>
-            <legend class='border-bottom mb-4'>Add Post</legend>
+            <legend class='border-bottom mb-4'>Add Order</legend>
             {{form.as_p}}
         </fieldset>
         <div class="form-group">
-            <button class="btn btn-primary btn-lg active" role="button" type='submit' aria-pressed="true">Add the item</a>
+            <button class="btn btn-primary btn-lg active" role="button" type='submit' aria-pressed="true">Add the Order</a>
             </div>
     </form>
 </div>

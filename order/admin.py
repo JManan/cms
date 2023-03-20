@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import Items
+from .models import Orders
 
-
-admin.site.register(Items)
+admin.site.register(Orders)

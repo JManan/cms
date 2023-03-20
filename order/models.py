@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.urls import reverse
 
-class Items(models.Model):
+class Orders(models.Model):
     name = models.TextField(max_length=50, unique=True)
     description = models.TextField(max_length=500)
     price = models.IntegerField()
@@ -14,3 +14,4 @@ class Items(models.Model):
     
     def get_absolute_url(self):
         return reverse("detail", kwargs={"pk": self.id})
+

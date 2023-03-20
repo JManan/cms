@@ -1,28 +1,28 @@
 from django.shortcuts import render, redirect
-from .models import Items
+from .models import Orders
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
-
+from .forms import UserRegisterForm
 
 def home(request):
     return render(request, 'order/home.html')
 
-class ItemView(generic.ListView):
-    context_object_name = 'Items'
+class OrderView(generic.ListView):
+    context_object_name = 'Orders'
     template_name = 'order/items_list.html'
 
     def get_queryset(self):
-        return Items.objects.all()
+        return Orders.objects.all()
 
 class DetailView(LoginRequiredMixin, generic.DetailView):
-    model = Items
-    context_object_name = 'item'
+    model = Orders
+    context_object_name = 'order'
     template_name = 'order/detail.html'
 
 class UpdateView(generic.UpdateView):
-    model = Items
-    context_object_name = 'item'
+    model = Orders
+    context_object_name = 'order'
     template_name = 'order/edit.html'
     fields = ['name', 'description', 'price', 'quantity']
     
@@ -31,10 +31,10 @@ class UpdateView(generic.UpdateView):
         return super().form_valid(form)
     
 class CreateView(generic.CreateView):
-    model = Items
-    context_object_name = 'item'
+    model = Orders
+    context_object_name = 'order'
     success_url = ''
-    success_message = "Post created successfully"
+    success_message = "Order created successfully"
     template_name = 'order/add.html'
     fields = ['name', 'description', 'price', 'quantity']
 
@@ -44,11 +44,24 @@ class CreateView(generic.CreateView):
 
 
 class DeleteView(generic.DeleteView):
-    model = Items
+    model = Orders
     success_url = '/'
-    success_message = "Item deleted successfully"
+    success_message = "Order deleted successfully"
 
 
     def delete(self, request, *args, **kwargs):
         return super(DeleteView, self).delete(request, *args, **kwargs)
     template_name = 'order/delete.html'
+
+# login system
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            return redirect('orders')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'order/register.html', {'form' : form})

@@ -7,16 +7,16 @@
     <title>Edit</title>
 </head>
 <body>
-    <h1> Welcome to Edit item page!</h1>
+    <h1> Welcome to Edit Order page!</h1>
 <div class="content-section">
     <form method="POST">
         {% csrf_token %}
         <fieldset class='form-group'>
-            <legend class='border-bottom mb-4'>Edit Post</legend>
+            <legend class='border-bottom mb-4'>Edit Order</legend>
             {{form}}
         </fieldset>
         <div class="form-group">
-            <button class="btn btn-primary btn-lg active" a href="{% url 'detail' item.id %}" role="button" type='submit' aria-pressed="true">Save Changes</a>
+            <button class="btn btn-primary btn-lg active" a href="{% url 'detail' order.id %}" role="button" type='submit' aria-pressed="true">Save Changes</a>
             </div>
     </form>
 </div>

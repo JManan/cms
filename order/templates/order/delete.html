@@ -13,7 +13,7 @@
         {% csrf_token %}
         <form method="POST">
             <h2>Are you sure you want to delete "{{object.name}}"?</h2>
-        <button type="submit" class="btn btn-danger" role="button" aria-pressed="true" a href="{% url 'items' %}">Delete</button>
+        <button type="submit" class="btn btn-danger" role="button" aria-pressed="true" a href="{% url 'orders' %}">Delete</button>
         <button onclick="location.href='{% url "detail" object.id %}'" type="button">Cancel</button>
     </form>
 </div>

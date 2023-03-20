@@ -20,7 +20,16 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
     context_object_name = 'item'
     template_name = 'order/detail.html'
 
-
+class UpdateView(generic.UpdateView):
+    model = Items
+    context_object_name = 'item'
+    template_name = 'order/edit.html'
+    fields = ['name', 'description', 'price', 'quantity']
+    
+    def form_valid(self, form):
+        form.instance.date_updated = timezone.now()
+        return super().form_valid(form)
+    
 class CreateView(generic.CreateView):
     model = Items
     context_object_name = 'item'

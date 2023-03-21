@@ -14,8 +14,17 @@ Description -- {{order.description}}
 Price -- {{order.price}}
 <br> quantity-- {{ order.quantity }}<br>
 date updated -- {{ order.date_updated }}<br>
+{% if order.favorites == True %}
+<label for="favs">Marked as favorite!</label>
+{% else %}
+<label for="favs">Not Marked as favorite!</label>
+{% endif %}
     </p>
 <p><a href="{% url 'delete-order' order.id %}">Delete This Order</a></p>
+
+<br>
+<br>
+<a href="{% url 'edit-post' order.id %}" type="button">Edit this order</a>
 
 </body>
 </html>

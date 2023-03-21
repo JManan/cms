@@ -24,7 +24,7 @@ class UpdateView(generic.UpdateView):
     model = Orders
     context_object_name = 'order'
     template_name = 'order/edit.html'
-    fields = ['name', 'description', 'price', 'quantity']
+    fields = ['name', 'description', 'price', 'quantity', 'favorites']
     
     def form_valid(self, form):
         form.instance.date_updated = timezone.now()
@@ -36,7 +36,7 @@ class CreateView(generic.CreateView):
     success_url = ''
     success_message = "Order created successfully"
     template_name = 'order/add.html'
-    fields = ['name', 'description', 'price', 'quantity']
+    fields = ['name', 'description', 'price', 'quantity', 'favorites']
 
     def form_valid(self, form):
         form.instance.date_updated = timezone.now()
@@ -53,6 +53,15 @@ class DeleteView(generic.DeleteView):
         return super(DeleteView, self).delete(request, *args, **kwargs)
     template_name = 'order/delete.html'
 
+def favorites(request):
+    list = []
+    for order in Orders.objects.all():
+        if order.favorites == True:
+            list.append(order)
+    context = {'order':list}
+    return render(request, 'order/favorites_order.html', context=context)
+
+
 # login system
 
 def register(request):
@@ -65,3 +74,4 @@ def register(request):
     else:
         form = UserRegisterForm()
     return render(request, 'order/register.html', {'form' : form})
+

@@ -7,7 +7,9 @@ class Orders(models.Model):
     description = models.TextField(max_length=500)
     price = models.IntegerField()
     quantity = models.IntegerField()
+    favorites = models.BooleanField(default=False)
     date_updated = models.DateTimeField(default=timezone.now)
+
 
     def __str__(self):
         return f'{self.name}'

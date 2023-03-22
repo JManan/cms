@@ -13,6 +13,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "order",
+    # "taggit",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -84,6 +85,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+TAGGIT_CASE_INSENSITIVE = True
 
 LANGUAGE_CODE = "en-us"
 

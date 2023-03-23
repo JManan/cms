@@ -9,7 +9,7 @@
 <body>
     {% for order in order %}
     <p>
-        <h4>Name -- {{ order.name }}</h4>
+        <h4>Name -- {{ order.name}}</h4>
         {{ order.tags }}
         <br>
         <a href = '{% url "detail" order.id %}'>Click here for the order</a>

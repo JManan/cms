@@ -5,12 +5,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 from .forms import UserRegisterForm
 from .models import Tags
+from django.contrib.auth.decorators import login_required
 
-Tags_dict = dict((x, y) for x, y, in Tags)
 
+@login_required()
 def home(request):
     return render(request, 'order/home.html')
 
+@login_required()
 def tags(request, slug):
     order = Orders.objects.filter(tags = slug).values()
     context = {
@@ -19,7 +21,7 @@ def tags(request, slug):
     print()
     return render(request, 'order/tags.html', context=context)
 
-class OrderView(generic.ListView):
+class OrderView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'Orders'
     template_name = 'order/orders_list.html'
 
@@ -31,30 +33,30 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
     context_object_name = 'order'
     template_name = 'order/detail.html'
 
-class UpdateView(generic.UpdateView):
+class UpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Orders
     context_object_name = 'order'
     template_name = 'order/edit.html'
-    fields = ['name', 'description', 'price', 'quantity', 'favorites']
+    fields = ['name', 'description', 'price', 'quantity', 'favorites', 'tags']
     
     def form_valid(self, form):
         form.instance.date_updated = timezone.now()
         return super().form_valid(form)
     
-class CreateView(generic.CreateView):
+class CreateView(LoginRequiredMixin, generic.CreateView):
     model = Orders
     context_object_name = 'order'
     success_url = ''
     success_message = "Order created successfully"
     template_name = 'order/add.html'
-    fields = ['name', 'description', 'price', 'quantity', 'favorites']
+    fields = ['name', 'description', 'price', 'quantity', 'favorites', 'tags']
 
     def form_valid(self, form):
         form.instance.date_updated = timezone.now()
         return super().form_valid(form)
 
 
-class DeleteView(generic.DeleteView):
+class DeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Orders
     success_url = '/'
     success_message = "Order deleted successfully"
@@ -64,6 +66,7 @@ class DeleteView(generic.DeleteView):
         return super(DeleteView, self).delete(request, *args, **kwargs)
     template_name = 'order/delete.html'
 
+@login_required()
 def favorites(request):
     list = []
     for order in Orders.objects.all():
@@ -74,7 +77,7 @@ def favorites(request):
 
 
 # login system
-
+@login_required()
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)

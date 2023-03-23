@@ -4,34 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orders_List</title>
+    <title>Tags_order</title>
 </head>
 <body>
-    {% for order in Orders %}
+    {% for order in order %}
     <p>
         <h4>Name -- {{ order.name }}</h4>
         {{ order.tags }}
         <br>
         <a href = '{% url "detail" order.id %}'>Click here for the order</a>
-        {% endfor %}
+        {% endfor %} 
     </p>
 </body>
-
-<a href="{% url 'add-order' %}">Add Order</a>
-<br>
-<br>
-
-<p>
-
-</p>
-
-<a href="{% url 'favorites' %}">Favorites</a>
-<br>
-<br>
-<a href="{% url 'logout' %}" type="button">Logout</a>
-
-<p>
-    {{ param }}
-</p>
-
 </html>

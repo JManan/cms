@@ -3,6 +3,16 @@ from django.utils import timezone
 from django.urls import reverse
 # from taggit.managers import TaggableManager
 
+Tags = (
+    ("electronics", "electronics"),
+    ("furniture", "furniture"),
+    ("food", "food"),
+    ("stationary", "stationary"),
+    ("beverages", "beverages"),
+    ("other", "other"),
+)
+
+
 class Orders(models.Model):
     name = models.TextField(max_length=50, unique=True)
     description = models.TextField(max_length=500)
@@ -10,7 +20,11 @@ class Orders(models.Model):
     quantity = models.IntegerField()
     favorites = models.BooleanField(default=False)
     date_updated = models.DateTimeField(default=timezone.now)
-    # tags = TaggableManager()
+    tags = models.CharField(
+        max_length = 20,
+        choices = Tags,
+        default = 'other'
+    )
 
 
     def __str__(self):

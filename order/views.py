@@ -4,13 +4,24 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 from .forms import UserRegisterForm
+from .models import Tags
+
+Tags_dict = dict((x, y) for x, y, in Tags)
 
 def home(request):
     return render(request, 'order/home.html')
 
+def tags(request, slug):
+    order = Orders.objects.filter(tags = slug).values()
+    context = {
+        'order':order
+    }
+    print()
+    return render(request, 'order/tags.html', context=context)
+
 class OrderView(generic.ListView):
     context_object_name = 'Orders'
-    template_name = 'order/items_list.html'
+    template_name = 'order/orders_list.html'
 
     def get_queryset(self):
         return Orders.objects.all()

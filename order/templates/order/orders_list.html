@@ -7,6 +7,14 @@
     <title>Orders_List</title>
 </head>
 <body>
+<!-- hardcoded tags -->
+<a href="{% url 'tags' 'electronics'%}"> electronics</a> 
+<a href="{% url 'tags' 'furniture' %}"> furniture</a> 
+<a href="{% url 'tags' 'stationary' %}"> stationary</a> 
+<a href="{% url 'tags' 'food' %}"> food </a> 
+<a href="{% url 'tags' 'beverages' %}"> beverages </a> 
+<a href="{% url 'tags' 'other' %}"> other</a> 
+
     {% for order in Orders %}
     <p>
         <h4>Name -- {{ order.name }}</h4>

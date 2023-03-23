@@ -19,7 +19,8 @@ def tags(request, slug):
     print()
     return render(request, 'order/tags.html', context=context)
 
-class OrderView(generic.ListView):
+
+class OrderView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'Orders'
     template_name = 'order/orders_list.html'
 
@@ -31,7 +32,7 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
     context_object_name = 'order'
     template_name = 'order/detail.html'
 
-class UpdateView(generic.UpdateView):
+class UpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Orders
     context_object_name = 'order'
     template_name = 'order/edit.html'
@@ -41,7 +42,7 @@ class UpdateView(generic.UpdateView):
         form.instance.date_updated = timezone.now()
         return super().form_valid(form)
     
-class CreateView(generic.CreateView):
+class CreateView(LoginRequiredMixin, generic.CreateView):
     model = Orders
     context_object_name = 'order'
     success_url = ''
@@ -54,7 +55,7 @@ class CreateView(generic.CreateView):
         return super().form_valid(form)
 
 
-class DeleteView(generic.DeleteView):
+class DeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Orders
     success_url = '/'
     success_message = "Order deleted successfully"
@@ -64,6 +65,7 @@ class DeleteView(generic.DeleteView):
         return super(DeleteView, self).delete(request, *args, **kwargs)
     template_name = 'order/delete.html'
 
+@LoginRequiredMixin
 def favorites(request):
     list = []
     for order in Orders.objects.all():
@@ -74,7 +76,7 @@ def favorites(request):
 
 
 # login system
-
+@LoginRequiredMixin
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)

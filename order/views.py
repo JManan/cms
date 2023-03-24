@@ -4,7 +4,6 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 from .forms import UserRegisterForm
-from .models import Tags
 from django.contrib.auth.decorators import login_required
 
 
@@ -77,7 +76,7 @@ def favorites(request):
 
 
 # login system
-@login_required()
+
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)

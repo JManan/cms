@@ -13,7 +13,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "order",
-    # "taggit",
+    'crispy_forms',
+    'crispy_bootstrap5',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -96,6 +97,9 @@ USE_I18N = True
 USE_TZ = True
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 STATIC_URL = "static/"
 

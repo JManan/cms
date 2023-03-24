@@ -1,31 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Details</title>
-</head>
-<body>
-    <p>
-<h2> Title -- {{ order.name }}</h2>
-Description -- {{order.description}}
-<br>
-Price -- {{order.price}}
-<br> quantity-- {{ order.quantity }}<br>
-date updated -- {{ order.date_updated }}<br>
-tags -- {{ order.tags }}<br>
-{% if order.favorites == True %}
-<label for="favs">Marked as favorite!</label>
-{% else %}
-<label for="favs">Not Marked as favorite!</label>
-{% endif %}
-    </p>
-<p><a href="{% url 'delete-order' order.id %}">Delete This Order</a></p>
+{% extends './base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
 
-<br>
-<br>
-<a href="{% url 'edit-post' order.id %}" type="button">Edit this order</a>
+<h4>Order Name - {{ order.name }}</h4>
 
-</body>
-</html>
+<div>
+    Description - {{order.description}}
+    <br>
+    Price - {{order.price}}
+    <br> quantity - {{ order.quantity }}<br>
+    date updated - {{ order.date_updated }}<br>
+    tag - {{ order.tags }}<br>
+    {% if order.favorites == True %}
+    <label for="favs">Marked as favorite!</label>
+    {% else %}
+    <label for="favs">Not Marked as favorite!</label>
+    {% endif %}
+</div>
+<div>
+    <button onclick="location.href='{% url "delete-order" order.id %}'"  class="btn btn-danger btn-lg active"  role="button" type='submit' aria-pressed="true">Delete</a>
+    <button onclick="location.href='{% url "edit-order" order.id %}'"  class="btn btn-info btn-lg active"  role="button" type='submit' aria-pressed="true">Edit</a>
+</div>
+
+{% endblock content %}

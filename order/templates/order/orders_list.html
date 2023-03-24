@@ -1,45 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orders_List</title>
-</head>
-<body>
-<!-- hardcoded tags -->
-<a href="{% url 'tags' 'electronics'%}"> electronics</a> 
-<a href="{% url 'tags' 'furniture' %}"> furniture</a> 
-<a href="{% url 'tags' 'stationary' %}"> stationary</a> 
-<a href="{% url 'tags' 'food' %}"> food </a> 
-<a href="{% url 'tags' 'beverages' %}"> beverages </a> 
-<a href="{% url 'tags' 'other' %}"> other</a> 
-
+{% extends './base.html' %}
+{% block content %}
     {% for order in Orders %}
-    <p>
-        <h4>Name -- {{ order.name }}</h4>
-        {{ order.tags }}
-        <br>
-        <a href = '{% url "detail" order.id %}'>Click here for the order</a>
-        {% endfor %}
-    </p>
-</body>
+    <div class="list-group">
+        <a href="{% url "detail" order.id %}" class="list-group-item list-group-item-action" aria-current="true">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ order.name }}</h5>
+            <small>{{ order.date_updated }}</small>
+          </div>
+          <p class="mb-1">{{ order.description }}</p>
+          <small> Tag -> {{ order.tags }}</small>
+        </a>
+      </div>
+    <br>
+    </div>
+    {% endfor %}
+<button onclick="location.href='{% url "add-order" %}'"  class="btn btn-outline-success"  role="button" type='submit' aria-pressed="true">Add order</a>
+<button onclick="location.href='{% url "logout" %}'"  class="btn btn-outline-dark"  role="button" type='submit' aria-pressed="true">Logout</a>
 
-<a href="{% url 'add-order' %}">Add Order</a>
-<br>
-<br>
-
-<p>
-
-</p>
-
-<a href="{% url 'favorites' %}">Favorites</a>
-<br>
-<br>
-<a href="{% url 'logout' %}" type="button">Logout</a>
-
-<p>
-    {{ param }}
-</p>
-
-</html>
+{% endblock content %}

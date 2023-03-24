@@ -1,19 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tags_order</title>
-</head>
-<body>
+{% extends './base.html' %}
+{% block content %}
     {% for order in order %}
-    <p>
-        <h4>Name -- {{ order.name}}</h4>
-        {{ order.tags }}
-        <br>
-        <a href = '{% url "detail" order.id %}'>Click here for the order</a>
-        {% endfor %} 
-    </p>
-</body>
-</html>
+    <div class="list-group">
+        <a href="{% url "detail" order.id %}" class="list-group-item list-group-item-action" aria-current="true">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ order.name }}</h5>
+            <small>{{ order.date_updated }}</small>
+          </div>
+          <p class="mb-1">{{ order.description }}</p>
+          <small> Tag -> {{ order.tags }}</small>
+        </a>
+      </div>
+    <br>
+    </div>
+{% endfor %} 
+{% endblock content %}

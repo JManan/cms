@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends './base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
     <h1> Welcome to Delete an item page!</h1>
 <div class="content-section">
     <form method="POST">
@@ -17,5 +11,4 @@
         <button onclick="location.href='{% url "detail" object.id %}'" type="button">Cancel</button>
     </form>
 </div>
-</body>
-</html>
+{% endblock content %}

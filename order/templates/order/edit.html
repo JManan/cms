@@ -1,24 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit</title>
-</head>
-<body>
-    <h1> Welcome to Edit Order page!</h1>
+{% extends './base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
 <div class="content-section">
     <form method="POST">
         {% csrf_token %}
         <fieldset class='form-group'>
             <legend class='border-bottom mb-4'>Edit Order</legend>
-            {{form}}
-        </fieldset>
-        <div class="form-group">
+            {{form|crispy}}
             <button class="btn btn-primary btn-lg active" a href="{% url 'detail' order.id %}" role="button" type='submit' aria-pressed="true">Save Changes</a>
-            </div>
     </form>
 </div>
-</body>
-</html>
+{% endblock content %}

@@ -26,6 +26,8 @@ class Orders(models.Model):
         default = 'other'
     )
 
+    class Meta:
+        ordering = ['-date_updated']
 
     def __str__(self):
         return f'{self.name}'
